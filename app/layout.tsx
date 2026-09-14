@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Mono, Bricolage_Grotesque, Inter } from 'next/font/google'
 import SplashCursor from '@/components/effects/SplashCursor'
+import Particles from '@/components/effects/Particles'
 import BubbleMenu, { type BubbleMenuItem } from '@/components/layout/BubbleMenu'
 import './globals.css'
 
@@ -54,6 +55,22 @@ export default function RootLayout({
       className={`${spaceMono.variable} ${headline.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Ambient background field, fixed to the viewport so it's visible on
+            every page — rendered above regular content (z-index) since every
+            section has its own opaque background, but below the interactive
+            cursor effects and nav. pointer-events:none keeps it purely
+            decorative. */}
+        <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+          <Particles
+            particleColors={['#5fe6a0', '#67e8f9', '#f5f4f7']}
+            particleCount={200}
+            particleSpread={12}
+            speed={0.08}
+            particleBaseSize={60}
+            alphaParticles
+            disableRotation={false}
+          />
+        </div>
         <SplashCursor RAINBOW_MODE={false} COLOR="#5fe6a0" TRANSPARENT SHADING />
         <BubbleMenu
           items={NAV_ITEMS}
