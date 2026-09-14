@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --background: #05060b;
+  --foreground: #f5f4f7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  cursor: none;
+  font-family: var(--font-inter), Inter, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-headline), 'Bricolage Grotesque', sans-serif;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

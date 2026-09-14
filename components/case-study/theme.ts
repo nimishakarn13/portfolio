@@ -1,0 +1,11 @@
+export const HEADLINE = 'var(--font-headline, "Bricolage Grotesque"), sans-serif'
+export const SM = 'var(--font-space-mono, "Space Mono", monospace)'
+export const BODY = 'var(--font-inter, Inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+
+export const ACCENT = '#5fe6a0'
+export const BG = '#05060b'
+export const SURFACE = '#0a0b12'
+export const BORDER = 'rgba(245,244,247,0.12)'
+export const TEXT = '#f5f4f7'
+export const MUTED = '#a9acbc'
+export const MUTED_LABEL = '#8b8e9e'
