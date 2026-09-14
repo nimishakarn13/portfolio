@@ -2,26 +2,10 @@
 
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import CaseStudyNavLink from '@/components/layout/CaseStudyNavLink'
 import { Displacement } from '@/components/canvasui/Displacement'
 import { headline as playfair } from '@/lib/fonts'
 
 const inter = Inter({ weight: ['400', '500', '600'], subsets: ['latin'] })
-
-function ResumeIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path d="M14 2v6h6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M8 13h8M8 17h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  )
-}
 
 export default function Hero() {
   return (
@@ -37,72 +21,6 @@ export default function Hero() {
         flexDirection: 'column',
       }}
     >
-      {/* ── Header ── */}
-      <header
-        className="hero-header"
-        style={{
-          position: 'relative',
-          zIndex: 20,
-          padding: '28px clamp(16px, 5vw, 44px)',
-        }}
-      >
-        <span
-          className={inter.className}
-          style={{ fontSize: 'clamp(12px, 3vw, 15px)', fontWeight: 600, color: '#f5f4f7', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
-        >
-          NIMISHA KARN
-        </span>
-
-        <nav className="hero-header-nav" style={{ gap: 'clamp(18px, 3vw, 36px)' }}>
-          <CaseStudyNavLink
-            href="#work"
-            label="Work"
-            className={`nav-link ${inter.className}`}
-            style={{ fontSize: '13px', color: '#c7c9d6', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}
-          />
-          <a
-            href="#about"
-            className={`nav-link ${inter.className}`}
-            style={{ fontSize: '13px', color: '#c7c9d6', textDecoration: 'none', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}
-          >
-            About me
-          </a>
-          <a
-            href="#contact"
-            className={`nav-link ${inter.className}`}
-            style={{ fontSize: '13px', color: '#c7c9d6', textDecoration: 'none', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}
-          >
-            Contact
-          </a>
-        </nav>
-
-        <a
-          href="https://drive.google.com/file/d/1wbFD24DsvsZRSfpl-l4_xM4LFKWFoTCE/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={inter.className}
-          style={{
-            justifySelf: 'end',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '9px 16px',
-            borderRadius: '999px',
-            border: '1px solid rgba(245,244,247,0.22)',
-            background: 'rgba(245,244,247,0.04)',
-            color: '#f5f4f7',
-            fontSize: '11px',
-            fontWeight: 600,
-            letterSpacing: '0.08em',
-            textDecoration: 'none',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          <ResumeIcon />
-          RESUME
-        </a>
-      </header>
-
       {/* ── Hero body ── */}
       <div className="hero-body" style={{ position: 'relative', flex: 1 }}>
         {/* enormous, near-invisible decorative background word */}
@@ -269,25 +187,6 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .hero-header {
-          display: grid;
-          grid-template-columns: auto auto;
-          justify-content: space-between;
-          align-items: center;
-          gap: 12px;
-        }
-        .hero-header-nav {
-          display: none;
-        }
-        @media (min-width: 768px) {
-          .hero-header {
-            grid-template-columns: 1fr auto 1fr;
-          }
-          .hero-header-nav {
-            display: flex;
-            justify-content: center;
-          }
-        }
 
         .hero-body {
           max-width: 1440px;
@@ -296,6 +195,10 @@ export default function Hero() {
           padding: clamp(24px, 5vw, 44px) clamp(16px, 5vw, 44px) 0;
           display: flex;
           flex-direction: column;
+          /* Pins the text (and, on mobile, the portrait that follows it in
+             flow) to the bottom of the hero's full viewport height instead
+             of starting right under the nav. */
+          justify-content: flex-end;
         }
 
         .hero-portrait {
@@ -332,7 +235,12 @@ export default function Hero() {
         @media (min-width: 900px) {
           .hero-body {
             flex-direction: row;
-            align-items: stretch;
+            /* .hero-portrait is position:absolute at this breakpoint, so
+               .hero-columns is the only real flex participant here —
+               bottom-anchoring it (instead of stretching it full-height)
+               keeps the portrait completely untouched while pinning the
+               text block to the bottom of the viewport. */
+            align-items: flex-end;
             min-height: 640px;
             padding-bottom: clamp(32px, 6vw, 64px);
           }
@@ -357,10 +265,12 @@ export default function Hero() {
             order: initial;
             flex-direction: row;
             justify-content: space-between;
-            align-items: flex-start;
+            /* Bottom-align the headline and description against each other
+               too, so the whole cluster reads as sitting on one baseline
+               near the bottom rather than headline-high/description-low. */
+            align-items: flex-end;
             width: 100%;
             gap: 40px;
-            margin-top: clamp(48px, 8vh, 96px);
           }
 
           .hero-left {
@@ -371,7 +281,6 @@ export default function Hero() {
           .hero-right {
             width: 380px;
             flex-shrink: 0;
-            margin-top: clamp(140px, 20vh, 260px);
           }
         }
 

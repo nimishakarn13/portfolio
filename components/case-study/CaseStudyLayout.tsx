@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
-import CaseStudyNavLink from '@/components/layout/CaseStudyNavLink'
-import { ImgPlaceholder, LiveClock, Divider } from './CaseStudyUI'
+import { ImgPlaceholder, Divider } from './CaseStudyUI'
 import { ACCENT, BG, BODY, BORDER, HEADLINE, MUTED, MUTED_LABEL, SM, TEXT } from './theme'
 
 export type CaseStudyNavSection = { id: string; number: string; title: string }
@@ -106,49 +105,8 @@ export default function CaseStudyLayout({
 
   return (
     <div style={{ background: BG, color: TEXT, minHeight: '100vh' }}>
-      {/* ── Navbar ── */}
-      <header
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '24px 44px',
-          zIndex: 200,
-          background: 'rgba(5,6,11,0.88)',
-          backdropFilter: 'blur(8px)',
-          borderBottom: `1px solid ${BORDER}`,
-        }}
-      >
-        <a href="/" style={{ textDecoration: 'none' }}>
-          <span style={{ fontSize: '15px', fontWeight: 600, color: TEXT, letterSpacing: '0.06em' }}>
-            NIMISHA KARN
-          </span>
-        </a>
-
-        <LiveClock />
-
-        <nav style={{ display: 'flex', gap: '36px' }}>
-          <CaseStudyNavLink
-            href="/#work"
-            className="nav-link"
-            style={{ fontSize: '13px', color: ACCENT, letterSpacing: '0.06em' }}
-          />
-          <a
-            href="/#about"
-            className="nav-link"
-            style={{ fontSize: '13px', color: TEXT, textDecoration: 'none', letterSpacing: '0.06em' }}
-          >
-            ABOUT ME
-          </a>
-        </nav>
-      </header>
-
       {/* ── Page Wrapper ── */}
-      <main style={{ paddingTop: '81px' }}>
+      <main style={{ paddingTop: '40px' }}>
 
         {/* ── Page Hero ── */}
         <section style={{ padding: isMobile ? '60px 24px 0' : '80px 64px 0', maxWidth: '1200px', margin: '0 auto' }}>
@@ -273,8 +231,8 @@ export default function CaseStudyLayout({
                 width: '25%',
                 flexShrink: 0,
                 position: 'sticky',
-                top: '81px',
-                height: 'calc(100vh - 81px)',
+                top: '110px',
+                height: 'calc(100vh - 110px)',
                 paddingTop: '80px',
                 paddingRight: '40px',
                 paddingBottom: '40px',
