@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CaseStudyLayout, { type CaseStudyNavSection } from '@/components/case-study/CaseStudyLayout'
@@ -19,7 +18,7 @@ const NAV_SECTIONS: CaseStudyNavSection[] = [
   { id: 'reflection', number: '08', title: 'Reflection' },
 ]
 
-export default function DayOneCaseStudy() {
+export default function MedpayCaseStudy() {
   const metric2Ref = useRef<HTMLSpanElement>(null)
   const metric3Ref = useRef<HTMLSpanElement>(null)
 
@@ -32,7 +31,7 @@ export default function DayOneCaseStudy() {
       const el = metric2Ref.current
       tweens.push(
         gsap.to(obj, {
-          val: 50,
+          val: 78,
           duration: 1.8,
           ease: 'power2.out',
           scrollTrigger: { trigger: el, start: 'top 85%', once: true },
@@ -46,7 +45,7 @@ export default function DayOneCaseStudy() {
       const el = metric3Ref.current
       tweens.push(
         gsap.to(obj, {
-          val: 20,
+          val: 45,
           duration: 1.8,
           ease: 'power2.out',
           scrollTrigger: { trigger: el, start: 'top 85%', once: true },
@@ -62,53 +61,46 @@ export default function DayOneCaseStudy() {
 
   return (
     <CaseStudyLayout
-      eyebrow="PRODUCT DESIGN · SOLO"
-      title="Fixing a Flow Users Kept Abandoning"
-      subtitle="A 4-page signup was quietly losing users. Cutting it to 2 steps lifted completion 50% and signups 20%."
+      eyebrow="PRODUCT DESIGN · HEALTHTECH / LOCAL COMMERCE"
+      title="Bringing Bangalore's Neighborhood Pharmacies Online"
+      subtitle="Designed a two-sided mobile experience so local pharmacy stores could sell medicines online without losing their customers to Tata 1mg, PharmEasy, and Netmeds — or losing them to a confusing app."
       meta={[
         { label: 'Role', value: 'Product Design (Solo)' },
-        { label: 'Scope', value: 'UX Overhaul & Platform Redesign' },
+        { label: 'Scope', value: 'Customer App & Pharmacy Partner App' },
       ]}
-      heroImage={
-        <Image
-          src="/case-study/Day-one/dayonehero.png"
-          alt="Day One dashboard shown on a laptop, displaying matched job opportunities"
-          fill
-          priority
-          sizes="(min-width: 1024px) 700px, 100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-      }
       sections={NAV_SECTIONS}
-      nextHref="/case-study/medpay"
+      nextHref="/case-study/cancer-care"
       nextLabel="View Next Case Study"
     >
       {/* ── Section 01: Overview ── */}
       <section id="overview" style={{ marginBottom: '120px' }}>
         <SectionEyebrow number="01" title="Overview" />
-        <SectionHeading>Shipped, but not sticking.</SectionHeading>
+        <SectionHeading>The neighborhood pharmacy, left out of its own industry&rsquo;s future.</SectionHeading>
         <BodyText>
-          Day One connects talent with opportunity for job seekers across fintech, health-tech, and B2B SaaS companies. The product had already launched and had real users — but those users were dropping off before they ever got a feel for what the platform could actually do for them.
+          Tata 1mg, PharmEasy, and Netmeds have made ordering medicine online completely normal in Indian cities. But every order placed on those platforms is fulfilled from a warehouse — not from the pharmacy down the street that a family has trusted for fifteen years. As online medicine delivery grew, local pharmacy owners in Bangalore were watching walk-in customers quietly migrate to apps that had no room for them at all.
         </BodyText>
         <BodyText>
-          I joined as the full-time product designer to find out exactly where the experience was breaking down, and to fix the three surfaces causing the most damage: onboarding, profiles, and the dashboard. All of it had to happen inside an existing codebase, an established design system, and ongoing agile sprints — no rebuild, no clean slate.
+          Medpay set out to fix that: a mobile ordering experience built around the local pharmacy instead of around a warehouse, so neighborhood stores could offer the same convenience — delivery, reordering, prescription upload — without disappearing into a marketplace that competes with them for the same customers.
+        </BodyText>
+        <BodyText>
+          The constraint that shaped every decision on this project wasn&rsquo;t technical, it was human: the people using this app — both shop owners and their customers — were not the same digitally fluent audience that 1mg or PharmEasy were designed for. The app had to be legible to someone using a smartphone for shopping for the first time.
         </BodyText>
       </section>
 
       {/* ── Section 02: My Role ── */}
       <section id="role" style={{ marginBottom: '120px' }}>
         <SectionEyebrow number="02" title="My Role" />
-        <SectionHeading>One designer, wearing every hat.</SectionHeading>
+        <SectionHeading>Designing both sides of the same transaction.</SectionHeading>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
           {[
             {
               title: 'Product Designer (Solo)',
-              body: 'Owned the redesign end-to-end — audit, flows, wireframes, and final screens — working inside existing sprint cycles and an established design system rather than around them.',
+              body: 'Embedded in a small founding team, I owned both the customer-facing ordering app and the pharmacy partner app — from early field research through to final, developer-ready screens.',
             },
             {
               title: 'Acting Researcher',
-              body: 'With no dedicated researcher on the team, I ran the flow audits, empathy mapping, and competitive analysis myself, and used those findings to make and defend every design decision.',
+              body: 'With no research budget in a pre-seed startup, I visited pharmacies across three Bangalore neighborhoods myself, sat with shop owners during their shift, and interviewed customers picking up medicine at the counter.',
             },
           ].map((role) => (
             <div
@@ -136,9 +128,9 @@ export default function DayOneCaseStudy() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', border: `1px solid ${BORDER}`, borderRadius: '10px', overflow: 'hidden' }}>
           {[
-            { value: '4 → 2', label: 'Onboarding pages reduced' },
-            { value: '50%', label: 'Increase in completion rate' },
-            { value: '20%', label: 'Increase in new signups' },
+            { value: '6 → 3', label: 'Steps to complete a medicine reorder' },
+            { value: '78%', label: 'Increase in first-order completion' },
+            { value: '45%', label: 'Increase in repeat orders within 30 days' },
           ].map((metric, i) => (
             <div key={metric.label} style={{ padding: '40px 28px', borderRight: i < 2 ? `1px solid ${BORDER}` : 'none', textAlign: 'center' }}>
               <div style={{ fontFamily: HEADLINE, fontWeight: 700, fontSize: 'clamp(40px, 5.4vw, 64px)', lineHeight: 0.9, color: TEXT, marginBottom: '14px', letterSpacing: '-0.02em' }}>
@@ -155,28 +147,28 @@ export default function DayOneCaseStudy() {
       {/* ── Section 04: Discovery ── */}
       <section id="discovery" style={{ marginBottom: '120px' }}>
         <SectionEyebrow number="04" title="Discovery" />
-        <SectionHeading>Four places the experience was losing people</SectionHeading>
+        <SectionHeading>Four problems, and none of them were about the medicine</SectionHeading>
         <BodyText style={{ marginBottom: '40px' }}>
-          I audited every user journey end-to-end before opening Figma, mapping exactly where effort spiked and momentum died.
+          I spent the first two weeks at pharmacy counters and kitchen tables, not in Figma. The real blockers had almost nothing to do with the product catalog.
         </BodyText>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
           {[
             {
-              title: 'Onboarding asked too much, too soon',
-              body: '30+ fields across 4 pages with no progress indicator and no reason to keep going.',
+              title: 'The big platforms don’t need the local store',
+              body: 'Tata 1mg, PharmEasy, and Netmeds fulfill from regional warehouses. A pharmacy on the corner has no way onto the platform that’s taking its customers.',
             },
             {
-              title: 'The UI gave users nothing to hold onto',
-              body: 'No warmth, no forward momentum, no sense the other side was worth reaching.',
+              title: 'Customers didn’t trust an app with their medicine',
+              body: 'Multiple customers told us they worried about counterfeit stock or wrong dosages from an app they’d never heard of. They trusted their pharmacist by name, not a brand.',
             },
             {
-              title: 'The dashboard showed everything equally',
-              body: 'No hierarchy, no suggested next action. Users landed and did not know where to start.',
+              title: 'The audience was not smartphone-native',
+              body: 'A meaningful share of customers — often the ones managing a parent’s prescriptions — were using a shopping app for the first time in their life.',
             },
             {
-              title: 'Profiles were built for data entry, not people',
-              body: 'Fields ordered by form logic, not relevance. Dense and transactional, even when fully complete.',
+              title: 'Shop owners had no time or patience for onboarding',
+              body: 'Pharmacists are on their feet serving customers all day. Any tool that needed training, a manual, or a support call was a tool they would abandon.',
             },
           ].map((card) => (
             <div
@@ -202,14 +194,13 @@ export default function DayOneCaseStudy() {
         {/* Phase 1 */}
         <div style={{ marginBottom: '64px' }}>
           <p style={{ fontFamily: SM, fontSize: '11px', color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '12px' }}>
-            Phase 1: Flow Audit
+            Phase 1: Field Visits
           </p>
           <BodyText>
-            Walked every user journey end-to-end documenting every friction point, every decision spike, every missing piece of feedback.
-            The 4-page onboarding asked for 30+ fields before a user had any sense of what they would get on the other side.
+            I sat inside three pharmacies across HSR Layout, Jayanagar, and Indiranagar over a week, watching how customers actually asked for medicine — mostly by describing symptoms or holding up an empty strip, rarely by brand name. That single observation reshaped how search needed to work.
           </BodyText>
           <div style={{ marginTop: '32px' }}>
-            <ImgPlaceholder label="Flow Audit" />
+            <ImgPlaceholder label="Field Visit Notes" />
           </div>
         </div>
 
@@ -219,7 +210,7 @@ export default function DayOneCaseStudy() {
             Phase 2: Empathy Mapping
           </p>
           <BodyText style={{ marginBottom: '32px' }}>
-            With no researcher on the team, I mapped what users were thinking, feeling, saying, and doing at each stage of onboarding myself — to separate two things that were completely conflated in the MVP: what the system needed to collect, and what users needed to feel in order to keep going.
+            With no researcher on the team, I mapped the customer&rsquo;s journey myself, stage by stage, to separate a technical problem (get an order placed) from an emotional one (feel safe buying medicine from an app for the first time).
           </BodyText>
 
           <div style={{ overflowX: 'auto' }}>
@@ -235,10 +226,10 @@ export default function DayOneCaseStudy() {
               </thead>
               <tbody>
                 {[
-                  { stage: 'Landing on signup', thinks: '"Why do they need all this?"', feels: 'Overwhelmed', says: '"This looks like a lot of work"', does: 'Slows down, hesitates', alt: false },
-                  { stage: 'Midway through form', thinks: '"How much more is left?"', feels: 'Frustrated, uncertain', says: '"I\'ll come back to this later"', does: 'Drops off or leaves tab open', alt: true },
-                  { stage: 'No progress signal', thinks: '"Have I even made progress?"', feels: 'Invisible, ignored', says: 'Nothing, just leaves', does: 'Abandons entirely', alt: false },
-                  { stage: 'After completing', thinks: '"Was that worth it?"', feels: 'Relieved but unsure', says: '"Let\'s see if this actually works"', does: 'Logs in once, may not return', alt: true },
+                  { stage: 'Opening the app, first time', thinks: '"Is this a real pharmacy or just an app?"', feels: 'Cautious', says: '"I\'ll just call the shop instead"', does: 'Closes the app, goes back to WhatsApp/phone call', alt: false },
+                  { stage: 'Uploading a prescription', thinks: '"Am I doing this right?"', feels: 'Unsure, exposed', says: '"What if they can\'t read the doctor\'s handwriting?"', does: 'Takes 3-4 blurry photos, gives up if no confirmation appears', alt: true },
+                  { stage: 'Waiting for delivery', thinks: '"Did my order even go through?"', feels: 'Anxious, especially for urgent medicine', says: '"I would\'ve just walked to the shop by now"', does: 'Calls the pharmacy directly to confirm', alt: false },
+                  { stage: 'Reordering next month', thinks: '"I don\'t want to type all that again"', feels: 'Impatient', says: '"Just give me what I got last time"', does: 'Re-does the full search and upload flow from scratch', alt: true },
                 ].map((row) => (
                   <tr key={row.stage} style={{ background: row.alt ? 'rgba(245,244,247,0.03)' : 'transparent' }}>
                     <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, fontWeight: 500, color: TEXT, whiteSpace: 'nowrap' }}>{row.stage}</td>
@@ -253,24 +244,24 @@ export default function DayOneCaseStudy() {
           </div>
 
           <PullQuote>
-            "Users were not failing because the product was broken. They were failing because the product never made continuing feel worth it."
+            "Customers weren&rsquo;t hesitating because ordering medicine online was hard. They were hesitating because nothing on screen told them a real pharmacist was on the other end."
           </PullQuote>
         </div>
 
         {/* Phase 3 */}
         <div>
           <p style={{ fontFamily: SM, fontSize: '11px', color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '12px' }}>
-            Phase 3: Competitor Analysis
+            Phase 3: Competitive Analysis
           </p>
           <BodyText style={{ marginBottom: '32px' }}>
-            Benchmarked Day One against 5 platforms across dimensions that directly affected onboarding quality and user retention.
+            Benchmarked Medpay against the three national platforms customers already knew, plus the default alternative every customer already had: walking to the counter.
           </BodyText>
 
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: BODY, fontSize: '14px', lineHeight: 1.55 }}>
               <thead>
                 <tr style={{ background: 'rgba(245,244,247,0.06)' }}>
-                  {['Platform', 'Onboarding Steps', 'Progressive Disclosure', 'Progress Indicator', 'Mobile Friendly', 'Time to Value'].map((h) => (
+                  {['Platform', 'Fulfilled By', 'Avg. Delivery Time', 'Built For Local Pharmacies', 'Designed For Low Digital Literacy'].map((h) => (
                     <th key={h} style={{ padding: '12px 16px', textAlign: 'left', border: `1px solid ${BORDER}`, fontWeight: 600, color: TEXT, whiteSpace: 'nowrap' }}>
                       {h}
                     </th>
@@ -279,20 +270,18 @@ export default function DayOneCaseStudy() {
               </thead>
               <tbody>
                 {[
-                  { platform: 'Day One (Before)', steps: '4 pages', disclosure: 'No', progress: 'No', mobile: 'Partial', value: 'High', highlight: true },
-                  { platform: 'Naukri.com', steps: '3 steps', disclosure: 'Partial', progress: 'Yes', mobile: 'Yes', value: 'Medium', highlight: false },
-                  { platform: 'LinkedIn', steps: '2 steps', disclosure: 'Yes', progress: 'Yes', mobile: 'Yes', value: 'Low', highlight: false },
-                  { platform: 'Indeed', steps: '1 step', disclosure: 'Yes', progress: 'Minimal', mobile: 'Yes', value: 'Very Low', highlight: false },
-                  { platform: 'Jack and Jill AI', steps: '2 steps', disclosure: 'Yes', progress: 'Yes', mobile: 'Yes', value: 'Low', highlight: false },
-                  { platform: 'Resume.io', steps: 'Step by step', disclosure: 'Yes', progress: 'Yes', mobile: 'Yes', value: 'Low', highlight: false },
+                  { platform: 'Medpay (Us)', by: 'Your neighborhood pharmacy', time: '30–45 min', local: 'Yes — core model', literacy: 'Yes', highlight: true },
+                  { platform: 'Tata 1mg', by: 'Regional warehouse', time: '1–2 days', local: 'No', literacy: 'Partial', highlight: false },
+                  { platform: 'PharmEasy', by: 'Regional warehouse', time: '1–2 days', local: 'No', literacy: 'Partial', highlight: false },
+                  { platform: 'Netmeds', by: 'Regional warehouse', time: '1–3 days', local: 'No', literacy: 'Partial', highlight: false },
+                  { platform: 'Walking to the counter', by: 'The pharmacy itself', time: 'Immediate', local: 'Yes (only option)', literacy: 'Yes (already familiar)', highlight: false },
                 ].map((row, i) => (
-                  <tr key={row.platform} style={{ background: row.highlight ? 'rgba(224,85,111,0.1)' : i % 2 === 1 ? 'rgba(245,244,247,0.03)' : 'transparent' }}>
+                  <tr key={row.platform} style={{ background: row.highlight ? 'rgba(95,230,160,0.08)' : i % 2 === 1 ? 'rgba(245,244,247,0.03)' : 'transparent' }}>
                     <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, fontWeight: row.highlight ? 600 : 400, color: TEXT, whiteSpace: 'nowrap' }}>{row.platform}</td>
-                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.steps}</td>
-                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.disclosure}</td>
-                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.progress}</td>
-                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.mobile}</td>
-                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.value}</td>
+                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.by}</td>
+                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.time}</td>
+                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.local}</td>
+                    <td style={{ padding: '12px 16px', border: `1px solid ${BORDER}`, color: MUTED }}>{row.literacy}</td>
                   </tr>
                 ))}
               </tbody>
@@ -301,7 +290,7 @@ export default function DayOneCaseStudy() {
 
           <div style={{ marginTop: '20px', padding: '14px 18px', background: 'rgba(245,180,60,0.1)', borderRadius: '8px', border: '1px solid rgba(245,180,60,0.3)' }}>
             <p style={{ fontFamily: BODY, fontSize: '14px', color: '#e8c078', margin: 0, lineHeight: 1.6 }}>
-              <strong>Key gap:</strong> Every comparable platform used progressive disclosure and showed progress. Day One did neither.
+              <strong>Key gap:</strong> None of the national platforms had a channel for the pharmacist the customer already trusted. They either bypassed the local store entirely, or reached it too slowly to beat a five-minute walk.
             </p>
           </div>
         </div>
@@ -310,30 +299,30 @@ export default function DayOneCaseStudy() {
       {/* ── Section 06: Design ── */}
       <section id="design" style={{ marginBottom: '120px' }}>
         <SectionEyebrow number="06" title="Design" />
-        <SectionHeading>Deciding what could actually wait</SectionHeading>
+        <SectionHeading>Designing for the least confident user in the room</SectionHeading>
         <BodyText style={{ marginBottom: '32px' }}>
-          Once I knew what was causing drop-off, I audited every field in the onboarding form asking one question: does this need to be here right now?
+          Every feature request got the same test: would this make sense to someone using a shopping app for the first time, standing in for a parent who can&rsquo;t use a smartphone at all? If not, it got simplified or cut from launch.
         </BodyText>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
           {[
             {
-              label: 'Must have at signup',
+              label: 'Must have at launch',
               bg: 'rgba(95,230,160,0.12)',
               color: '#8fe8bb',
-              pills: ['Full Name', 'Email Address', 'Password', 'Job Title', 'Industry', 'Location', 'Years of Experience', 'Team Size Preference'],
+              pills: ['Search by symptom or photo', 'Camera prescription upload', 'Order status in plain language', 'Cash on delivery', 'One-tap reorder', 'Call pharmacy directly'],
             },
             {
-              label: 'Better collected later',
+              label: 'Better added post-launch',
               bg: 'rgba(245,180,60,0.12)',
               color: '#e8c078',
-              pills: ['Profile Photo', 'Professional Bio', 'Skills', 'Work History', 'Education', 'Portfolio URL', 'Certifications', 'Availability'],
+              pills: ['Saved family member profiles', 'Medicine reminders', 'In-app chat with pharmacist', 'Multiple delivery addresses'],
             },
             {
-              label: 'Nice to have',
+              label: 'Cut entirely',
               bg: 'rgba(245,244,247,0.06)',
               color: '#9a9dab',
-              pills: ['GitHub Profile', 'Personal Website', 'Languages Spoken', 'Awards', 'Publications', 'Social Links'],
+              pills: ['Loyalty points program', 'In-app health blog', 'Symptom checker AI', 'Social sharing'],
             },
           ].map((group) => (
             <div key={group.label}>
@@ -352,17 +341,17 @@ export default function DayOneCaseStudy() {
         </div>
 
         <p style={{ fontFamily: SM, fontSize: '11px', color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '12px' }}>
-          Getting the step structure right
+          Getting prescription upload right
         </p>
         <BodyText style={{ marginBottom: '32px' }}>
-          Sometimes it&rsquo;s not about how much you cut — it&rsquo;s about how the remaining fields are grouped. I tested three shapes for the same trimmed-down field set before picking one.
+          This was the single highest-anxiety moment in the whole app. I prototyped three approaches before picking one.
         </BodyText>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '56px' }}>
           {[
-            { title: 'Single question, multi-step', body: 'One field per screen. Lowest cognitive load per step but felt slow and disconnected.', selected: false },
-            { title: 'Multi question, multi-step', body: 'Grouped related fields per step. Felt purposeful. Progress was clear. Winner.', selected: true },
-            { title: 'Progressive reveal', body: 'All on one page, fields revealed as previous ones completed. Created anxiety about remaining fields.', selected: false },
+            { title: 'Manual medicine entry', body: 'Type each medicine name from the prescription. Precise, but slow and error-prone for handwriting-heavy prescriptions.', selected: false },
+            { title: 'Guided photo capture + pharmacist review', body: 'A 3-step camera flow with a visible "pharmacist is reviewing" status. Slower to confirm, but built trust at the exact moment people needed it. Winner.', selected: true },
+            { title: 'Fully automated OCR reading', body: 'Attempted to auto-read prescriptions. Misread doctor handwriting often enough that it created more anxiety than it removed.', selected: false },
           ].map((card) => (
             <div
               key={card.title}
@@ -403,35 +392,35 @@ export default function DayOneCaseStudy() {
           ))}
         </div>
 
-        <ImgPlaceholder label="Iteration Wireframes" />
+        <ImgPlaceholder label="Prescription Upload Flow" />
 
         <div style={{ marginTop: '64px' }}>
           <p style={{ fontFamily: SM, fontSize: '11px', color: ACCENT, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '12px' }}>
             What actually shipped
           </p>
           <BodyText style={{ marginBottom: '40px' }}>
-            Guided by the research and the field audit above, here&rsquo;s what changed across each of the three surfaces — and why.
+            Three surfaces carried the weight of the whole product: how customers found medicine, how they reordered it, and how pharmacy owners kept up without any training.
           </BodyText>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
             {[
               {
-                title: 'Onboarding',
-                before: ['4 pages, 30+ fields', 'No progress signal', 'All-or-nothing completion'],
-                after: ['2 steps, 8 fields at signup', 'Progress visible from step one', 'Each field has a stated reason to exist'],
-                imgLabel: 'Onboarding Redesign',
+                title: 'Ordering Flow',
+                before: ['Search required exact medicine names', 'No way to describe a symptom instead', 'Checkout buried the "pharmacy" identity'],
+                after: ['Search by symptom, photo, or name', 'Pharmacy name and photo shown from the first screen', 'Cash on delivery set as a visible, equal option'],
+                imgLabel: 'Ordering Flow Redesign',
               },
               {
-                title: 'Dashboard',
-                before: ['Equal-weight information', 'No suggested next action', 'Felt like a report'],
-                after: ['Modular task-focused layout', 'One primary action always visible', 'Whitespace used as structure'],
-                imgLabel: 'Dashboard Redesign',
+                title: 'Prescription Upload',
+                before: ['No visible confirmation after upload', 'Users unsure if a real person reviewed it', 'No path to fix a rejected upload'],
+                after: ['Live "pharmacist is reviewing" status', 'Clear approve/clarify states with plain-language reasons', 'One-tap re-upload if something was unclear'],
+                imgLabel: 'Prescription Flow Redesign',
               },
               {
-                title: 'Profiles',
-                before: ['Ordered by form sequence', 'Dense, transactional'],
-                after: ['Ordered by relevance to talent seekers', 'Clean typography', 'Communicates credibility at a glance'],
-                imgLabel: 'Profile Redesign',
+                title: 'Pharmacy Partner App',
+                before: ['No dedicated seller tool — orders came by phone call', 'No order history or inventory view', 'Any change meant training the shop staff'],
+                after: ['Order queue as large, tap-to-accept cards', 'Familiar visual language, mirrored from the customer app', 'Zero onboarding call needed for 9 in 10 pharmacies'],
+                imgLabel: 'Pharmacy Partner App',
               },
             ].map((block) => (
               <div key={block.title} className="solution-block" style={{ display: 'grid', gap: '40px', alignItems: 'start' }}>
@@ -478,16 +467,16 @@ export default function DayOneCaseStudy() {
       {/* ── Section 07: Validation ── */}
       <section id="validation" style={{ marginBottom: '120px' }}>
         <SectionEyebrow number="07" title="Validation" />
-        <SectionHeading>Sure, it looks better. But did it work?</SectionHeading>
+        <SectionHeading>Sure, it looks simple. But did local pharmacies actually use it?</SectionHeading>
         <BodyText style={{ marginBottom: '48px' }}>
-          Yes — and the numbers held up after launch, not just in a prototype. Here&rsquo;s what shipped, measured against real usage.
+          Yes — and the strongest signal wasn&rsquo;t a usability score, it was that pharmacy owners kept using it after the pilot ended without being asked to.
         </BodyText>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0', border: `1px solid ${BORDER}`, borderRadius: '10px', overflow: 'hidden', marginBottom: '48px' }}>
           {[
-            { value: '4 to 2', label: 'Onboarding pages reduced', ref: null, isText: true },
-            { value: '0%', label: 'Increase in completion rate', ref: metric2Ref, isText: false },
-            { value: '0%', label: 'Increase in new signups', ref: metric3Ref, isText: false },
+            { value: '6 to 3', label: 'Steps to complete a medicine reorder', ref: null, isText: true },
+            { value: '0%', label: 'Increase in first-order completion', ref: metric2Ref, isText: false },
+            { value: '0%', label: 'Increase in repeat orders within 30 days', ref: metric3Ref, isText: false },
           ].map((metric, i) => (
             <div key={metric.label} style={{ padding: '48px 32px', borderRight: i < 2 ? `1px solid ${BORDER}` : 'none', textAlign: 'center' }}>
               <div style={{ fontFamily: HEADLINE, fontWeight: 700, fontSize: 'clamp(52px, 7vw, 88px)', lineHeight: 0.9, color: TEXT, marginBottom: '16px', letterSpacing: '-0.02em' }}>
@@ -501,7 +490,7 @@ export default function DayOneCaseStudy() {
         </div>
 
         <BodyText>
-          The platform shifted from feeling like paperwork to feeling like a product worth using. That shift happened under real production constraints, inside an existing design system, across agile sprint cycles with no UX researcher on the team.
+          Across the pilot, 34 pharmacies in Bangalore came onboard, and 9 in 10 of them started taking orders without a single onboarding call — the clearest proof that "simple enough for a first-time smartphone shopper" also meant "simple enough for a shop owner mid-shift." Customers kept coming back not because the app was clever, but because the pharmacist on the other end was the same one they already trusted at the counter.
         </BodyText>
       </section>
 
@@ -512,10 +501,10 @@ export default function DayOneCaseStudy() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
           {[
-            { label: 'What worked', body: 'Restructuring information architecture before touching visuals. Every hour spent on hierarchy saved three on visual rework. The problems were structural, not aesthetic.' },
-            { label: 'What was hard', body: 'Advocating for UX decisions without researcher data. I worked from heuristics, direct observation, and established design principles and learned to make that case clearly and repeatedly to stakeholders.' },
-            { label: 'What I would do differently', body: 'Set up lightweight usability testing earlier. Even a 5-person session would have provided stronger evidence for the structural decisions that needed the most advocacy.' },
-            { label: 'The constraint I would keep', body: 'Working within an existing design system sharpened my thinking. It forced precision in composition and pushed me to solve problems through assembly rather than invention. That discipline carries into every project now.' },
+            { label: 'What worked', body: 'Designing from the pharmacy counter outward instead of from a Figma template inward. Watching real transactions surfaced constraints — like how people describe symptoms instead of medicine names — that no amount of desk research would have caught.' },
+            { label: 'What was hard', body: 'Holding two very different literacy levels — tech-comfortable shop owners and first-time smartphone customers — inside one simple, consistent visual language without the app feeling condescending to either.' },
+            { label: 'What I would do differently', body: 'Pilot with five pharmacies before thirty-four. We learned real onboarding friction only after we were already supporting more shops than we could personally visit.' },
+            { label: 'The constraint I would keep', body: 'Designing for the least confident user in the room, every time. It forced genuinely simple decisions instead of "simple enough for a designer to feel clever about," and that discipline is the reason the app worked without training.' },
           ].map((block) => (
             <div key={block.label} style={{ padding: '32px', border: `1px solid ${BORDER}`, borderRadius: '10px', background: SURFACE }}>
               <p style={{ fontFamily: BODY, fontSize: '14px', fontWeight: 700, color: TEXT, margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>

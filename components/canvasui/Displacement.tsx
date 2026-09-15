@@ -332,15 +332,43 @@ export function createDisplacement(
   // Bakes the image's own CSS filter (e.g. grayscale) into the rasterized
   // pixels, since texImage2D reads the decoded bitmap and ignores CSS filters
   // applied to the live <img> element.
+  //
+  // The grayscale portion is applied by hand (getImageData/putImageData)
+  // rather than via ctx.filter: iOS Safari's CanvasRenderingContext2D.filter
+  // support is unreliable and can silently no-op, leaving the baked texture
+  // in full color even though the <img> itself reads "grayscale(100%)".
+  // Manual pixel desaturation works identically on every browser.
   function paintFallbackImage() {
     if (!fallbackImage || !sourceCtx) return;
     if (!fallbackImage.complete || fallbackImage.naturalWidth === 0) return;
     const computedFilter = window.getComputedStyle(fallbackImage).filter;
+    const grayscaleMatch = computedFilter.match(/grayscale\(([\d.]+)(%?)\)/);
+    const grayscaleAmount = grayscaleMatch
+      ? Math.min(Math.max(parseFloat(grayscaleMatch[1]) / (grayscaleMatch[2] ? 100 : 1), 0), 1)
+      : 0;
+    const remainingFilter = computedFilter.replace(/grayscale\([\d.]+%?\)/, "").trim();
+
     sourceCtx.clearRect(0, 0, source.width, source.height);
     sourceCtx.save();
-    sourceCtx.filter = computedFilter && computedFilter !== "none" ? computedFilter : "none";
+    sourceCtx.filter = remainingFilter && remainingFilter !== "none" ? remainingFilter : "none";
     sourceCtx.drawImage(fallbackImage, 0, 0, source.width, source.height);
     sourceCtx.restore();
+
+    if (grayscaleAmount > 0) {
+      const imageData = sourceCtx.getImageData(0, 0, source.width, source.height);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        data[i] = r + (luma - r) * grayscaleAmount;
+        data[i + 1] = g + (luma - g) * grayscaleAmount;
+        data[i + 2] = b + (luma - b) * grayscaleAmount;
+      }
+      sourceCtx.putImageData(imageData, 0, 0);
+    }
+
     contentDirty = true;
     wake();
   }

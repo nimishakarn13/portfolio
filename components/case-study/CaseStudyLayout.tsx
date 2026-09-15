@@ -15,6 +15,7 @@ type CaseStudyLayoutProps = {
   subtitle: string
   meta: { label: string; value: string }[]
   heroImageLabel?: string
+  heroImage?: React.ReactNode
   sections: CaseStudyNavSection[]
   nextHref?: string
   nextLabel?: string
@@ -27,6 +28,7 @@ export default function CaseStudyLayout({
   subtitle,
   meta,
   heroImageLabel = 'Hero Image Placeholder',
+  heroImage,
   sections,
   nextHref = '/#work',
   nextLabel = 'View Next Case Study',
@@ -109,70 +111,114 @@ export default function CaseStudyLayout({
       <main style={{ paddingTop: '40px' }}>
 
         {/* ── Page Hero ── */}
-        <section style={{ padding: isMobile ? '60px 24px 0' : '80px 64px 0', maxWidth: '1200px', margin: '0 auto' }}>
-          <p
-            style={{
-              fontFamily: SM,
-              fontSize: '11px',
-              color: MUTED_LABEL,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              margin: '0 0 28px 0',
-            }}
-          >
-            {eyebrow}
-          </p>
+        {(() => {
+            const copy = (
+              <>
+                <p
+                  style={{
+                    fontFamily: SM,
+                    fontSize: '11px',
+                    color: MUTED_LABEL,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    margin: '0 0 28px 0',
+                  }}
+                >
+                  {eyebrow}
+                </p>
 
-          <h1
-            style={{
-              fontFamily: HEADLINE,
-              fontWeight: 700,
-              fontSize: 'clamp(38px, 6.4vw, 84px)',
-              lineHeight: 1.02,
-              color: TEXT,
-              margin: '0 0 28px 0',
-              letterSpacing: '-0.01em',
-              maxWidth: '880px',
-            }}
-          >
-            {title}
-          </h1>
+                <h1
+                  style={{
+                    fontFamily: HEADLINE,
+                    fontWeight: 700,
+                    fontSize: heroImage ? 'clamp(34px, 4.6vw, 58px)' : 'clamp(38px, 6.4vw, 84px)',
+                    lineHeight: 1.05,
+                    color: TEXT,
+                    margin: '0 0 28px 0',
+                    letterSpacing: '-0.01em',
+                    maxWidth: heroImage ? '460px' : '880px',
+                  }}
+                >
+                  {title}
+                </h1>
 
-          <p
-            style={{
-              fontFamily: BODY,
-              fontSize: '18px',
-              lineHeight: 1.65,
-              color: MUTED,
-              margin: '0 0 40px 0',
-              maxWidth: '640px',
-            }}
-          >
-            {subtitle}
-          </p>
+                <p
+                  style={{
+                    fontFamily: BODY,
+                    fontSize: '18px',
+                    lineHeight: 1.65,
+                    color: MUTED,
+                    margin: '0 0 40px 0',
+                    maxWidth: '440px',
+                  }}
+                >
+                  {subtitle}
+                </p>
 
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '32px',
-              marginBottom: '52px',
-            }}
-          >
-            {meta.map(({ label, value }) => (
-              <div key={label}>
-                <span style={{ fontFamily: SM, fontSize: '10px', color: MUTED_LABEL, letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
-                  {label}
-                </span>
-                <span style={{ fontFamily: BODY, fontSize: '15px', color: TEXT }}>
-                  {value}
-                </span>
-              </div>
-            ))}
-          </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '32px',
+                    marginBottom: heroImage ? 0 : '52px',
+                  }}
+                >
+                  {meta.map(({ label, value }) => (
+                    <div key={label}>
+                      <span style={{ fontFamily: SM, fontSize: '10px', color: MUTED_LABEL, letterSpacing: '0.1em', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+                        {label}
+                      </span>
+                      <span style={{ fontFamily: BODY, fontSize: '15px', color: TEXT }}>
+                        {value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )
 
-          <ImgPlaceholder label={heroImageLabel} />
-        </section>
+            if (!heroImage) {
+              return (
+                <section style={{ padding: isMobile ? '60px 24px 0' : '80px 64px 0', maxWidth: '1200px', margin: '0 auto' }}>
+                  {copy}
+                  <ImgPlaceholder label={heroImageLabel} />
+                </section>
+              )
+            }
+
+            // Two-column layout: content on the left, image on the right.
+            // No overlay — the two columns stack on tablet and mobile.
+            return (
+              <section style={{ padding: isMobile ? '60px 24px 0' : '80px 64px 0', maxWidth: '1200px', margin: '0 auto' }}>
+                <div className="cs-hero-columns">
+                  <div className="cs-hero-columns__content">{copy}</div>
+                  <div className="cs-hero-columns__media">{heroImage}</div>
+                </div>
+              </section>
+            )
+          })()}
+
+        <style>{`
+          .cs-hero-columns {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .cs-hero-columns__media {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1569 / 1002;
+            border-radius: 10px;
+            overflow: hidden;
+          }
+          @media (min-width: 1024px) {
+            .cs-hero-columns {
+              grid-template-columns: minmax(320px, 440px) 1fr;
+              align-items: center;
+              gap: 56px;
+            }
+          }
+        `}</style>
 
         <div style={{ margin: '0 64px', paddingTop: '60px' }}>
           <Divider />

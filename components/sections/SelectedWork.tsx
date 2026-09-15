@@ -18,6 +18,16 @@ const PROJECTS = [
   },
   {
     index: '02',
+    title: 'Bringing Local Pharmacies Online',
+    tag: 'Product Design · HealthTech / Local Commerce',
+    blurb:
+      'A two-sided mobile app that let neighborhood pharmacies in Bangalore sell medicines online — without losing customers to Tata 1mg, PharmEasy, or Netmeds.',
+    href: '/case-study/medpay',
+    external: false,
+    imageLabel: 'Medpay Preview',
+  },
+  {
+    index: '03',
     title: 'Cancer Care Journey Map',
     tag: 'Concept · Healthcare',
     blurb:
@@ -27,7 +37,7 @@ const PROJECTS = [
     imageLabel: 'Cancer Care Preview',
   },
   {
-    index: '03',
+    index: '04',
     title: 'AI Portfolio Builder',
     tag: 'Product Design · AI / SaaS MVP',
     blurb:

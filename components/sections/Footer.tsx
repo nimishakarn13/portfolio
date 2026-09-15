@@ -7,8 +7,6 @@ const NAV_LINKS = [
   { href: '#contact', label: 'Contact' },
 ]
 
-const MARQUEE_ITEMS = ['Available for work', 'Let’s talk', 'Open to new projects']
-
 export default function Footer() {
   return (
     <footer
@@ -19,21 +17,6 @@ export default function Footer() {
         overflow: 'hidden',
       }}
     >
-      <div className="marquee" style={{ padding: 'clamp(14px, 2.4vw, 20px) 0' }}>
-        <div className="marquee-track">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span
-              key={i}
-              className={spaceMono.className}
-              style={{ fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8fe8bb' }}
-            >
-              {item}
-              <span style={{ color: 'rgba(245,244,247,0.3)', margin: '0 20px' }}>·</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
       <div
         style={{
           padding: 'clamp(56px, 10vw, 120px) clamp(16px, 5vw, 44px) clamp(32px, 5vw, 48px)',
@@ -118,7 +101,7 @@ export default function Footer() {
               className={inter.className}
               style={{ fontSize: '13px', color: '#71748a', letterSpacing: '0.02em' }}
             >
-              © {new Date().getFullYear()} Nimisha Karn. All rights reserved.
+              © {new Date().getFullYear()} Nimisha Karn. All rights reserved. · Vibecoded in Claude Code
             </span>
 
             <nav style={{ display: 'flex', gap: 'clamp(18px, 3vw, 32px)' }}>
@@ -138,20 +121,6 @@ export default function Footer() {
       </div>
 
       <style>{`
-        .marquee { width: 100%; overflow: hidden; border-bottom: 1px solid rgba(245,244,247,0.08); }
-        .marquee-track {
-          display: flex;
-          align-items: center;
-          width: max-content;
-          animation: footer-marquee-scroll 26s linear infinite;
-        }
-        @keyframes footer-marquee-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-33.3333%); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .marquee-track { animation: none; }
-        }
         .footer-email:hover, .footer-resume:hover {
           color: #5fe6a0;
           border-color: rgba(95,230,160,0.5);
